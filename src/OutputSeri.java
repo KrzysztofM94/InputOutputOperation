@@ -57,5 +57,8 @@ class CharacterClass implements Serializable {
         }
     }
 
+    public void Deserialization(){
 
+        
+    }
 }
