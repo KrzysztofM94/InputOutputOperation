@@ -5,8 +5,9 @@ public class OutputSeri {
 
     public static void main(String[] args) {
         CharacterClass characterClass = new CharacterClass(1, 2, 3);
-        characterClass.viewStats();
+        characterClass.Viewstats();
         characterClass.Serialization(characterClass);
+        characterClass.Deserialization();
     }
 }
 
@@ -31,14 +32,15 @@ class CharacterClass implements Serializable {
         this.vitality = 10;
     }
 
-    public void viewStats() {
+    public void Viewstats() {
 
         System.out.println("Siła: " + strength);
         System.out.println("Inteligencja: " + intelligence);
         System.out.println("Zręczność: " + agility);
         System.out.println("Hp: " + hp);
         System.out.println("Witalność: " + vitality);
-        System.out.println("Liczba obiektów: " + counter);
+        System.out.println("Liczba obiektów: " + counter+"\n\n\n");
+
     }
 
     public void Serialization(CharacterClass characterClass) {
@@ -59,6 +61,18 @@ class CharacterClass implements Serializable {
 
     public void Deserialization(){
 
-        
+        try {
+            FileInputStream fileInputStream = new FileInputStream("CharacterStats.txt");
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            CharacterClass characterClass = (CharacterClass) objectInputStream.readObject();
+            characterClass.Viewstats();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
