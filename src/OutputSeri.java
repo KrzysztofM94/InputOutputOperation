@@ -2,7 +2,6 @@ import java.io.*;
 import java.util.Random;
 
 public class OutputSeri {
-
     public static void main(String[] args) {
         CharacterClass characterClass = new CharacterClass(1, 2, 3);
         characterClass.Viewstats();
@@ -11,14 +10,12 @@ public class OutputSeri {
     }
 }
 
-
 class CharacterClass implements Serializable {
 
-    private int strength, intelligence, agility,hp;
+    private int strength, intelligence, agility, hp;
     private transient int vitality;
     private Random generator = new Random();
     static int counter = 0;
-
 
     static {
         counter++;
@@ -28,7 +25,7 @@ class CharacterClass implements Serializable {
         this.strength = strength;
         this.intelligence = intelligence;
         this.agility = agility;
-        this.hp = generator.nextInt(100)+10;
+        this.hp = generator.nextInt(100) + 10;
         this.vitality = 10;
     }
 
@@ -39,8 +36,7 @@ class CharacterClass implements Serializable {
         System.out.println("Zręczność: " + agility);
         System.out.println("Hp: " + hp);
         System.out.println("Witalność: " + vitality);
-        System.out.println("Liczba obiektów: " + counter+"\n\n\n");
-
+        System.out.println("Liczba obiektów: " + counter + "\n\n\n");
     }
 
     public void Serialization(CharacterClass characterClass) {
@@ -51,7 +47,6 @@ class CharacterClass implements Serializable {
             objectOutputStream.writeObject(characterClass);
             objectOutputStream.close();
             System.out.println("Operacja zakończona pomyślnie");
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -59,14 +54,12 @@ class CharacterClass implements Serializable {
         }
     }
 
-    public void Deserialization(){
-
+    public void Deserialization() {
         try {
             FileInputStream fileInputStream = new FileInputStream("CharacterStats.txt");
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             CharacterClass characterClass = (CharacterClass) objectInputStream.readObject();
             characterClass.Viewstats();
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
